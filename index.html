@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Video Player</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #fafafa;
+      margin-top: 40px;
+    }
+    video {
+      width: 80%;
+      max-width: 800px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    h1 {
+      color: #333;
+    }
+    p {
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="title">Loading...</h1>
+  <video id="videoPlayer" controls></video>
+  <p id="description"></p>
+
+  <script>
+    async function loadVideo() {
+      const response = await fetch('video.json');
+      const data = await response.json();
+
+      document.getElementById('title').textContent = data.title;
+      document.getElementById('description').textContent = data.description;
+      
+      const videoPlayer = document.getElementById('videoPlayer');
+      videoPlayer.src = data.file_name;
+    }
+
+    loadVideo();
+  </script>
+</body>
+</html>
